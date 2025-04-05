@@ -1,0 +1,23 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+
+# Logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+public/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
