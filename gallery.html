@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippet Gallery</title>
+    <link rel="stylesheet" href="styles/gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+</head>
+<body>
+    <header>
+        <h1>Code Snippet Gallery</h1>
+        <button id="login-github-btn">Login with GitHub</button>
+        <input type="text" id="search-bar" placeholder="Search snippets...">
+        <button id="upload-snippet-btn" disabled>Upload Snippet</button>
+        <button id="settings-btn">Settings</button>
+    </header>
+    <main>
+        <section id="snippet-gallery"></section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Code Snippet Gallery</p>
+    </footer>
+
+    <!-- Modal for uploading new snippets -->
+    <div id="upload-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Upload New Snippet</h2>
+            <label for="snippet-title">Title:</label>
+            <input type="text" id="snippet-title" placeholder="Snippet Title">
+            <label for="snippet-code">Code:</label>
+            <textarea id="snippet-code"></textarea>
+            <label for="snippet-docs">Documentation (optional):</label>
+            <textarea id="snippet-docs" placeholder="Describe the snippet..."></textarea>
+            <button id="save-snippet-btn">Save</button>
+            <button id="close-modal-btn">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal for previewing snippets -->
+    <div id="preview-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="preview-title"></h2>
+            <pre id="preview-code"></pre>
+            <p id="preview-docs"></p>
+            <button id="close-preview-btn">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal for settings -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Settings</h2>
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="high-contrast">High Contrast</option>
+            </select>
+            <label for="font-select">Font:</label>
+            <input type="text" id="font-select" placeholder="Enter font family">
+            <label for="font-size">Font Size:</label>
+            <input type="number" id="font-size" min="10" max="30" value="16">
+            <label for="custom-css">Custom CSS:</label>
+            <textarea id="custom-css" placeholder="Enter custom CSS"></textarea>
+            <label for="keybindings">Custom Keybindings:</label>
+            <textarea id="keybindings" placeholder="Enter keybindings (JSON format)"></textarea>
+            <label>
+                <input type="checkbox" id="read-aloud"> Enable Read Aloud
+            </label>
+            <label>
+                <input type="checkbox" id="captions"> Enable Captions
+            </label>
+            <button id="save-settings-btn">Save</button>
+            <button id="close-settings-btn">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="scripts/gallery.js"></script>
+    <script>
+        const clientId = 'Ov23li1WVFydgDSASeCd'; // Placeholder for GitHub OAuth App Client ID
+        const redirectUri = window.location.origin; // Your GitHub Pages URL
+        const scope = 'read:user';
+
+        // Check for GitHub OAuth token in URL
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = urlParams.get('access_token');
+
+        if (accessToken) {
+            console.log('GitHub Access Token:', accessToken);
+            // Use the token to fetch user data or enable features
+        } else {
+            document.getElementById('login-github-btn').addEventListener('click', () => {
+                // Redirect to GitHub OAuth login
+                window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+            });
+        }
+    </script>
+</body>
+</html>
