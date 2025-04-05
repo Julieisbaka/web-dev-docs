@@ -79,5 +79,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
     <script src="scripts/gallery.js"></script>
+    <script>
+        const clientId = '__GITHUB_CLIENT_ID__'; // Placeholder for GitHub OAuth App Client ID
+        const redirectUri = window.location.origin; // Your GitHub Pages URL
+        const scope = 'read:user';
+
+        // Check for GitHub OAuth token in URL
+        const urlParams = new URLSearchParams(window.location.hash.substring(1));
+        const accessToken = urlParams.get('access_token');
+
+        if (accessToken) {
+            console.log('GitHub Access Token:', accessToken);
+            // Use the token to fetch user data or enable features
+        } else {
+            document.getElementById('login-github-btn').addEventListener('click', () => {
+                // Redirect to GitHub OAuth login
+                window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+            });
+        }
+    </script>
 </body>
 </html>
