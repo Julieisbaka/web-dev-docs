@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loginGithubBtn.addEventListener('click', () => {
         // Redirect to GitHub OAuth login
-        const clientId = 'YOUR_GITHUB_APP_CLIENT_ID';
-        const redirectUri = 'YOUR_REDIRECT_URI';
+        const clientId = '__GITHUB_CLIENT_ID__';
+        const redirectUri = window.location.origin;
         const scope = 'repo';
         window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
     });
